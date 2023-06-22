@@ -1,5 +1,9 @@
 {%extends 'base.html'%}
 {%load static%}
+{% load django_bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 {%block content%}
 <div dir="rtl">
     <div class="container">
@@ -9,7 +13,7 @@
             <form method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
                 <h4 class="auth-header">قدم نفسك</h4>
-                   {{form}}
+                {% bootstrap_form form %}
                 <div class="buttons-w"><button type="submit" class="btn btn-success">انشاء</button></div>
                 
             </form>
