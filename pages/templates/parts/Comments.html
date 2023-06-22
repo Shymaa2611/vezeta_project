@@ -1,23 +1,12 @@
+{% load django_bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 <form method="POST" >
     {%csrf_token%}
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="input_field">
-              
-               {{form.comment_writer_name}}
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="input_field">
-                <input type="text"  placeholder=" الإسم">
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="input_field">
-               <input type="text"  placeholder=" الإسم">
-            </div>
-        </div>
+       {% bootstrap_form form %}
         <div class="col-md-12">
             <div class="submit_btn">
                 <button class="boxed-btn3 w-100" type="submit">تعليق</button>
