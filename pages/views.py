@@ -3,29 +3,39 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render,redirect
-from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView,TemplateView
-from .models import doctor_data,posts,appoint,blogs
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView,TemplateView,View
+from .models import doctor_data,posts,appoint,blogs,comments
 from .forms import commentForm,postForm,appointForm,profileForm
 from django.contrib.auth.forms import UserCreationForm
 
 #def index(request):
 #    return render(request,'pages/index.html')
-class doctor_list(ListView):
-    model=doctor_data
-    context_object_name='doctor_list'
-    template_name='pages/doctor_list.html'         
-    def get_queryset(self,*args,**kwargs):
-       qs=super().get_queryset(*args,**kwargs)
-       query=self.request.GET.get('search_name')
-       if query:
-           return qs.filter(title=query)
-       return qs
-        
-           
+
     
+class doctor_list(ListView):
+     model=doctor_data
+     context_object_name='doctor_list'
+     template_name='pages/doctor_list.html' 
+     
+   #  def get_context_data(self, **kwargs):
+    #    context = super().get_context_data(**kwargs)
+
+ 
+
+      
+
 class doctor_detail(DetailView):
     model=doctor_data
     context_object_name='doctor_detail'
+    template_name='pages/doctor_detail.html'
+    
+     
+        
+class Comments(CreateView):
+    model=comments
+    form_class=commentForm
+    success_url='/'
+    context_object_name='form'
     template_name='pages/doctor_detail.html'
 
 class signUp(CreateView):

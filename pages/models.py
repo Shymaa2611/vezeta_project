@@ -13,6 +13,8 @@ specialist=[
 class doctor_data(models.Model):
     doctor_name=models.CharField(max_length=100)
     subtitle=models.CharField(max_length=100)
+    doctor_image=models.ImageField()
+    clininc_image=models.ImageField()
     Specialist_doctor=models.CharField(max_length=200,choices=specialist)
     address=models.CharField(max_length=200,choices=category)
     address_detail=models.CharField(max_length=200)
@@ -30,6 +32,7 @@ class comments(models.Model):
 class posts(models.Model):
     post_name=models.CharField(max_length=100)
     post_content=models.TextField()
+    post_image=models.ImageField(blank=True,null=True)
     post_time_created=models.CharField(max_length=100)
     post_date_created=models.CharField(max_length=100)
 class appoint(models.Model):
@@ -40,6 +43,7 @@ class appoint(models.Model):
 class blogs(models.Model):
     blog_name=models.CharField(max_length=500)
     blog_description=models.TextField()
+    blog_image=models.ImageField(blank=True,null=True)
     publish_day=models.CharField(max_length=100)
     publish_date=models.DateField()
     publish_time=models.TimeField()

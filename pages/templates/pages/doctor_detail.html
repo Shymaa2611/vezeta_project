@@ -15,11 +15,11 @@
                     <div class="jobs_left d-flex align-items-center">
                         <div >
                             
-                                <img class="img-circle" src="{% static 'img/candiateds/2.png' %}" alt="" width="100" height="100">
+                                <img class="img-circle" src="{{doctor_detail.doctor_image.url}}" alt="" width="100" height="100">
                             
                         </div>
                         <div class="jobs_conetent">
-                            <a href="#" ><h4>الاسم</h4></a>
+                            <a href="#" ><h4>{{doctor_detail.doctor_name}}</h4></a>
                             <div class="links_locat d-flex align-items-center">
                                 <div class="location">
                                     <p> <i class="fa fa-map-marker"></i> مصر  ,{{doctor_detail.address}} </p>
@@ -119,33 +119,7 @@
     <!-- /comments -->                    
     <div class="apply_job_form white-bg">
         <h4>إترك تعليقك</h4>
-        <form method="POST" >
-            {%csrf_token%}
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="input_field">
-                       {{form.comment_writer_name}}
-                        
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="input_field">
-                        {{form.comment_writer_email}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="input_field">
-                        {{form.comment_message}}
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="submit_btn">
-                        <button class="boxed-btn3 w-100" type="submit">تعليق</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+       {%include 'parts/comments.html'%}
     </div>
         </div>
         <div class="col-lg-4">
