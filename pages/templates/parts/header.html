@@ -16,8 +16,8 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="">احجز دكتورك</a></li>|
-                                        <li><a href="">المقالات</a></li>|
+                                        <li><a href="{%url 'appointment'%}">احجز دكتورك</a></li>|
+                                        <li><a href="{%url 'blog_list'%}">المقالات</a></li>|
                                         <li><a href="">الصفحه الشخصيه </a></li>|
                                         <li><a href="contact.html">اتصل بنا</a></li>
                                     </ul>
@@ -30,7 +30,7 @@
                                 <div class="phone_num d-none d-xl-block"></div>
                                 {%if user.is_authenticated%}
                                 <div class="d-none d-lg-block">
-                                    <a class="boxed-btn3" href="{%url 'profile'%}">قدم نفسك</a>
+                                    <a class="boxed-btn3" href="{% url 'present' %}">قدم نفسك</a>
                                 </div>
                                 {%else%}
                                 

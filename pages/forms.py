@@ -1,10 +1,12 @@
 from django import forms
-from .models import comments,posts,appoint,doctor_data
+from .models import comments,posts,appoint,doctor_data,blogs
 
 class commentForm(forms.ModelForm):
     class Meta:
         model=comments
         fields='__all__'
+
+    
 class postForm(forms.ModelForm):
     class Meta:
         model=posts

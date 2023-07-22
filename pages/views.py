@@ -11,43 +11,36 @@ from .models import doctor_data,posts,appoint,blogs,comments
 from .forms import commentForm,postForm,appointForm,profileForm
 from django.contrib.auth.forms import UserCreationForm
 
-#def index(request):
-#    return render(request,'pages/index.html')
+def doctor_list(request):
+     name=None
+     Specialist_doctor=None
+     search=doctor_data.objects.all()
+     if 'search_name' in request.GET:
+            name=request.GET['search_name']
+            if name:
+                search=search.filter(doctor_name__icontains=name)
 
-    
-class doctor_list(ListView):
-     model=doctor_data
-     context_object_name='doctor_list'
-     template_name='pages/doctor_list.html' 
+     if 'specilization' in request.GET:
+          Specialist_doctor=request.GET['specilization']
+          if  Specialist_doctor:
+             search=search.filter(Specialist_doctor__icontains=Specialist_doctor)
+         
+     context={
+         'doctor_list':search
+     }
+     return render(request,'pages/doctor_list.html',context) 
      
-   #  def get_context_data(self, **kwargs):
-    #    context = super().get_context_data(**kwargs)
 
- 
-
-      
-
-class doctor_detail(DetailView):
-    model=doctor_data
-    context_object_name='doctor_detail'
-    template_name='pages/doctor_detail.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context ['comment'] = comments.objects. all()
-        context['form'] =commentForm()
-        return context
-
-class CommentCreateView(CreateView):
-    model = comments
-    form_class =commentForm
-
-    def get_success_URL(self):
-        return reverse ('request: detail', kwargs = {'slug':self.object.post.slug})
-
-    def form_valid(self, form):
-        post = get_object_or_404(Request, slug = self.kwargs ['slug'])
-        Form.instance.post = Request
-        return super().form_valid(form)
+def doctor_detail(request,pk):
+     if request.method=='POST':
+         add_Comment=commentForm(request.POST,request.FILES)
+         if add_Comment.is_valid():
+             add_Comment.save()
+     context={
+         'form':commentForm(),
+         'doctor_detail':doctor_data.objects.get(id=pk)
+     }
+     return render(request,'pages/doctor_detail.html',context)
 
 class signUp(CreateView):
     form_class=UserCreationForm
@@ -90,9 +83,20 @@ class blog_detail(DetailView):
     context_object_name='blog_detail'
     template_name='pages/blog_detail.html'
 
-class profile(CreateView):
+class update_profile(UpdateView):
     model=doctor_data
     form_class=profileForm
     context_object_name='form'
     success_url='/'
-    template_name='pages/create_profile.html'
+    template_name='pages/update_profile.html'
+
+class profile(DeleteView):
+    model=doctor_data
+    context_object_name='data'
+    success_url='/'
+    template_name='pages/profile.html'
+class present(CreateView):
+    model=doctor_data
+    context_object_name='form'
+    success_url='/'
+    template_name='pages/present_yourself.html'

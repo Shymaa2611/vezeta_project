@@ -1,24 +1,25 @@
 {%extends 'base.html'%}
+{%load static%}
 {% load django_bootstrap5 %}
 {# Load CSS and JavaScript #}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {%block content%}
-
 <div dir="rtl">
     <div class="container">
         <div class="signup">
+    
         <div class="col-md-9" >
             <form method="POST" enctype="multipart/form-data">
                 {%csrf_token%}
-                <h4 class="auth-header">انشاء مدونه جديده</h4>
-    
-                {% bootstrap_form form%}
-                <div class="buttons-w"><button type="submit" class="btn btn-success">حفظ</button></div>
+                <h4 class="auth-header">قدم نفسك</h4>
+                {% bootstrap_form form %}
+                <div class="buttons-w"><button type="submit" class="btn btn-success">انشاء</button></div>
                 
             </form>
         </div>
         </div>
     </div>
     </div>
+    
 {%endblock content%}
